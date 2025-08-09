@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const CurrencyConverter: React.FC = () => {
+  const { t } = useTranslation('common');
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('CNY');
@@ -56,23 +58,23 @@ const CurrencyConverter: React.FC = () => {
   return (
     <div className="currency-converter card">
       <div className="card-body">
-        <h5 className="card-title text-center">Currency Converter</h5>
-        {loading && <p className="text-center text-info">Loading rates...</p>}
-        {error && <p className="text-center text-danger">Error: {error}</p>}
+        <h5 className="card-title text-center">{t('currencyConverter')}</h5>
+        {loading && <p className="text-center text-info">{t('loadingRates')}</p>}
+        {error && <p className="text-center text-danger">{t('error')}: {error}</p>}
         {!loading && !error && (
           <>
             <div className="form-group">
-              <label>Amount</label>
+              <label>{t('amount')}</label>
               <input type="number" className="form-control" value={amount} onChange={handleAmountChange} />
             </div>
             <div className="form-group mt-2">
-              <label>From</label>
+              <label>{t('from')}</label>
               <select className="form-control" value={fromCurrency} onChange={handleFromCurrencyChange}>
                 {currencyOptions.map(option => <option key={option} value={option}>{option}</option>)}
               </select>
             </div>
             <div className="form-group mt-2">
-              <label>To</label>
+              <label>{t('to')}</label>
               <select className="form-control" value={toCurrency} onChange={handleToCurrencyChange}>
                 {currencyOptions.map(option => <option key={option} value={option}>{option}</option>)}
               </select>
