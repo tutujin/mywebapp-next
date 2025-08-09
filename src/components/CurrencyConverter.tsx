@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
 "use client";
+
+import React, { useState, useEffect } from 'react';
 
 const CurrencyConverter: React.FC = () => {
   const [amount, setAmount] = useState(1);
