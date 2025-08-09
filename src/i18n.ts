@@ -1,26 +1,19 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-
-// Import translation files
-import enTranslation from '../public/locales/en/translation.json';
-import zhTranslation from '../public/locales/zh/translation.json';
+import HttpBackend from 'i18next-http-backend';
 
 i18n
+  .use(HttpBackend) // load translations using http (default public/locales/)
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
-    resources: {
-      en: {
-        translation: enTranslation,
-      },
-      zh: {
-        translation: zhTranslation,
-      },
-    },
-    lng: 'en', // default language
     fallbackLng: 'en', // fallback language if translation is not found
-
+    lng: 'en', // default language
+    debug: false,
     interpolation: {
       escapeValue: false, // react already escapes by default
+    },
+    backend: {
+      loadPath: '/locales/{{lng}}/translation.json',
     },
   });
 
