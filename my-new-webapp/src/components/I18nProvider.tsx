@@ -9,6 +9,7 @@ interface I18nProviderProps {
   locale: string;
   resources: any;
 }
+// Added a comment to force recompile
 
 const I18nProvider = ({ children, locale, resources }: I18nProviderProps) => {
   const [i18nInstance, setI18nInstance] = useState<any>(null);
