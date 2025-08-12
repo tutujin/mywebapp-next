@@ -15,7 +15,6 @@
     "bootstrap": "^5.3.7",
     "i18next": "^25.3.2",
     "next": "15.4.6",
-    "next-intl": "^4.3.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-i18next": "^15.6.1"

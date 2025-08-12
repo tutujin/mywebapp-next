@@ -1,10 +1,9 @@
-import createMiddleware from 'next-intl/middleware';
+import { NextResponse } from 'next/server';
 
-export default createMiddleware({
-  locales: ['en'],
-  defaultLocale: 'en'
-});
+export function middleware() {
+  return new NextResponse('Middleware works!', { status: 200 });
+}
 
 export const config = {
-  matcher: ['/', '/(en)/:path*']
+  matcher: '/',
 };
