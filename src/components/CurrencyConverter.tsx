@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next'; // Removed
 
 const CurrencyConverter: React.FC = () => {
-  const { t } = useTranslation('common');
+  // const { t } = useTranslation('common'); // Removed
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('CNY');
@@ -79,9 +79,9 @@ const CurrencyConverter: React.FC = () => {
   return (
     <div className="currency-converter card">
       <div className="card-body">
-        <h5 className="card-title text-center">{t('currencyConverter')}</h5>
-        {loading && <p className="text-center text-info">{t('loadingRates')}</p>}
-        {error && <p className="text-center text-danger">{t('error')}: {error}</p>}
+        <h5 className="card-title text-center">Currency Converter</h5> {/* Replaced t('currencyConverter') */}
+        {loading && <p className="text-center text-info">Loading rates...</p>} {/* Replaced t('loadingRates') */}
+        {error && <p className="text-center text-danger">Error: {error}</p>} {/* Replaced t('error') */}
         {apiResponseDebug && (
           <div style={{ marginTop: '10px', padding: '10px', border: '1px solid #f00', backgroundColor: '#ffebeb', fontSize: '0.8em' }}>
             <strong>API Debug Info:</strong>
@@ -94,7 +94,7 @@ const CurrencyConverter: React.FC = () => {
               <p className="text-center text-warning">No currency options loaded. Check API key and response.</p>
             )}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>{t('amount')}</label>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>Amount</label> {/* Replaced t('amount') */}
               <input
                 type="number"
                 className="form-control"
@@ -106,7 +106,7 @@ const CurrencyConverter: React.FC = () => {
               />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>{t('from')}</label>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>From</label> {/* Replaced t('from') */}
               <select
                 className="form-control"
                 value={fromCurrency}
@@ -119,7 +119,7 @@ const CurrencyConverter: React.FC = () => {
               </select>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>{t('to')}</label>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>To</label> {/* Replaced t('to') */}
               <select
                 className="form-control"
                 value={toCurrency}

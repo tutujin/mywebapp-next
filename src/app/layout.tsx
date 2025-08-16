@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import I18nProvider from "@/components/I18nProvider";
-// import { createI18nInstance } from "@/i18n";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +18,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // const i18n = await createI18nInstance(params.locale);
-
   return (
     <html lang={params.locale}>
       <body className={inter.className}>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import './Calculator.css';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next'; // Removed
 
 // A more robust and safe evaluation function than eval()
 const safeEval = (expression: string) => {
@@ -21,7 +21,7 @@ const safeEval = (expression: string) => {
 };
 
 const Calculator: React.FC = () => {
-  const { t } = useTranslation('common');
+  // const { t } = useTranslation('common'); // Removed
   const [input, setInput] = useState('');
   const [result, setResult] = useState('');
 
@@ -45,7 +45,7 @@ const Calculator: React.FC = () => {
   return (
     <div className="calculator card">
       <div className="card-body">
-        <h5 className="card-title text-center">{t('calculator')}</h5>
+        <h5 className="card-title text-center">Calculator</h5> {/* Replaced t('calculator') */}
         <div className="display form-control mb-2">
           <div className="input">{input || 0}</div>
           <div className="result">{result}</div>
