@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import I18nProvider from "@/components/I18nProvider";
-import { createI18nInstance } from "@/i18n";
+// import I18nProvider from "@/components/I18nProvider";
+// import { createI18nInstance } from "@/i18n";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const i18n = await createI18nInstance(params.locale);
+  // const i18n = await createI18nInstance(params.locale);
 
   return (
     <html lang={params.locale}>
@@ -28,9 +28,7 @@ export default async function RootLayout({
         {/* 在此处粘贴您的 Google AdSense 代码 */}
         {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6098511288909511" crossorigin="anonymous"></script> */}
         
-        <I18nProvider i18n={i18n}>
-          {children}
-        </I18nProvider>
+        {children}
 
       </body>
     </html>
