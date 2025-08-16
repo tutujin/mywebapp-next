@@ -53,29 +53,29 @@ const Calculator: React.FC = () => {
         
         <div className="calculator-grid">
             {/* Top Row */}
-            <button onClick={() => handleButtonClick('AC')} className="btn btn-danger">AC</button>
-            <button onClick={() => handleButtonClick('√')} className="btn btn-warning">√</button>
-            <button onClick={() => handleButtonClick('x²')} className="btn btn-warning">x²</button>
+            <button onClick={() => handleButtonClick('AC')} className="btn-clear">AC</button>
+            <button onClick={() => handleButtonClick('√')} className="btn-function">√</button>
+            <button onClick={() => handleButtonClick('x²')} className="btn-function">x²</button>
             
             {/* Numpad */}
-            <button onClick={() => handleButtonClick('7')} className="btn btn-light">7</button>
-            <button onClick={() => handleButtonClick('8')} className="btn btn-light">8</button>
-            <button onClick={() => handleButtonClick('9')} className="btn btn-light">9</button>
-            <button onClick={() => handleButtonClick('4')} className="btn btn-light">4</button>
-            <button onClick={() => handleButtonClick('5')} className="btn btn-light">5</button>
-            <button onClick={() => handleButtonClick('6')} className="btn btn-light">6</button>
-            <button onClick={() => handleButtonClick('1')} className="btn btn-light">1</button>
-            <button onClick={() => handleButtonClick('2')} className="btn btn-light">2</button>
-            <button onClick={() => handleButtonClick('3')} className="btn btn-light">3</button>
-            <button onClick={() => handleButtonClick('0')} className="btn btn-light zero">0</button>
-            <button onClick={() => handleButtonClick('.')} className="btn btn-light">.</button>
+            <button onClick={() => handleButtonClick('7')} className="btn-number">7</button>
+            <button onClick={() => handleButtonClick('8')} className="btn-number">8</button>
+            <button onClick={() => handleButtonClick('9')} className="btn-number">9</button>
+            <button onClick={() => handleButtonClick('4')} className="btn-number">4</button>
+            <button onClick={() => handleButtonClick('5')} className="btn-number">5</button>
+            <button onClick={() => handleButtonClick('6')} className="btn-number">6</button>
+            <button onClick={() => handleButtonClick('1')} className="btn-number">1</button>
+            <button onClick={() => handleButtonClick('2')} className="btn-number">2</button>
+            <button onClick={() => handleButtonClick('3')} className="btn-number">3</button>
+            <button onClick={() => handleButtonClick('0')} className="btn-number zero">0</button>
+            <button onClick={() => handleButtonClick('.')} className="btn-number">.</button>
 
             {/* Side Column */}
-            <button onClick={() => handleButtonClick('÷')} className="btn btn-warning">÷</button>
-            <button onClick={() => handleButtonClick('x')} className="btn btn-warning">x</button>
-            <button onClick={() => handleButtonClick('-')} className="btn btn-warning">-</button>
-            <button onClick={() => handleButtonClick('+')} className="btn btn-warning">+</button>
-            <button onClick={() => handleButtonClick('=')} className="btn btn-danger equals">=</button>
+            <button onClick={() => handleButtonClick('÷')} className="btn-operator">÷</button>
+            <button onClick={() => handleButtonClick('x')} className="btn-operator">x</button>
+            <button onClick={() => handleButtonClick('-')} className="btn-operator">-</button>
+            <button onClick={() => handleButtonClick('+')} className="btn-operator">+</button>
+            <button onClick={() => handleButtonClick('=')} className="btn-operator equals">=</button>
         </div>
       </div>
     </div>

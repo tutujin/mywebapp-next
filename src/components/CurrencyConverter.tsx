@@ -55,6 +55,19 @@ const CurrencyConverter: React.FC = () => {
 
   const currencyOptions = Object.keys(exchangeRates).sort();
 
+  const inputStyle = {
+    flexGrow: 1,
+    padding: '8px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    outline: 'none',
+    transition: 'border-color 0.3s'
+  };
+
+  const focusStyle = {
+    borderColor: '#add8e6'
+  };
+
   return (
     <div className="currency-converter card">
       <div className="card-body">
@@ -63,23 +76,54 @@ const CurrencyConverter: React.FC = () => {
         {error && <p className="text-center text-danger">{t('error')}: {error}</p>}
         {!loading && !error && (
           <>
-            <div className="form-group">
-              <label>{t('amount')}</label>
-              <input type="number" className="form-control" value={amount} onChange={handleAmountChange} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>{t('amount')}</label>
+              <input
+                type="number"
+                className="form-control"
+                value={amount}
+                onChange={handleAmountChange}
+                style={inputStyle}
+                onFocus={(e) => Object.assign(e.target.style, focusStyle)}
+                onBlur={(e) => e.target.style.borderColor = '#ccc'}
+              />
             </div>
-            <div className="form-group mt-2">
-              <label>{t('from')}</label>
-              <select className="form-control" value={fromCurrency} onChange={handleFromCurrencyChange}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>{t('from')}</label>
+              <select
+                className="form-control"
+                value={fromCurrency}
+                onChange={handleFromCurrencyChange}
+                style={inputStyle}
+                onFocus={(e) => Object.assign(e.target.style, focusStyle)}
+                onBlur={(e) => e.target.style.borderColor = '#ccc'}
+              >
                 {currencyOptions.map(option => <option key={option} value={option}>{option}</option>)}
               </select>
             </div>
-            <div className="form-group mt-2">
-              <label>{t('to')}</label>
-              <select className="form-control" value={toCurrency} onChange={handleToCurrencyChange}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>{t('to')}</label>
+              <select
+                className="form-control"
+                value={toCurrency}
+                onChange={handleToCurrencyChange}
+                style={inputStyle}
+                onFocus={(e) => Object.assign(e.target.style, focusStyle)}
+                onBlur={(e) => e.target.style.borderColor = '#ccc'}
+              >
                 {currencyOptions.map(option => <option key={option} value={option}>{option}</option>)}
               </select>
             </div>
-            <h4 className="text-center mt-3">
+            <h4
+              className="text-center mt-3"
+              style={
+                {
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                  color: '#0070f3'
+                }
+              }
+            >
               {amount} {fromCurrency} = {convertedAmount.toFixed(2)} {toCurrency}
             </h4>
           </>
