@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import I18nProvider from "@/components/I18nProvider";
 import { createI18nInstance } from "@/i18n";
 
