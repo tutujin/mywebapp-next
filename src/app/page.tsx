@@ -13,10 +13,10 @@ export default function Home() {
     <div className="container mt-5">
       <h1 className="text-center mb-4">{t('multiTool')}</h1>
       <div className="two-column-layout">
-        <div className="column">
+        <div className="column converter-column">
           <CurrencyConverter />
         </div>
-        <div className="column">
+        <div className="column calculator-column">
           <Calculator />
         </div>
       </div>

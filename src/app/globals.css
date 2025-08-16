@@ -3,10 +3,39 @@
 .two-column-layout {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem; /* Adjust gap as needed */
+  gap: 1.5rem; /* Slightly reduced gap */
+  justify-content: center; /* Center columns if space allows */
 }
 
 .column {
   flex: 1;
   min-width: 300px; /* Ensures columns wrap on smaller screens */
+}
+
+.converter-column {
+  flex: 1.5; /* Give more space to the converter */
+  min-width: 350px; /* Ensure it doesn't get too small */
+  padding-bottom: 0.5rem; /* Reduce bottom padding/margin */
+}
+
+.calculator-column {
+  flex: 0.8; /* Make calculator column smaller */
+  max-width: 400px; /* Limit its max width */
+  min-width: 280px; /* Ensure it's not too small */
+}
+
+/* General styling for larger font in converter section */
+.converter-column h1,
+.converter-column h2,
+.converter-column h3,
+.converter-column p,
+.converter-column span,
+.converter-column div {
+  font-size: 1.2em; /* Example: Increase font size for common text elements */
+}
+
+/* Specific adjustment for the main exchange rate display if it exists */
+.converter-column .exchange-rate-display { /* Assuming such a class exists within CurrencyConverter */
+  font-size: 2em; /* Even larger for the main rate */
+  font-weight: bold;
 }
