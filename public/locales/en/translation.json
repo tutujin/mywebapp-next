@@ -9,6 +9,9 @@
     "loadingRates": "Loading rates...",
     "error": "Error",
     "fromCurrency": "From Currency",
-    "toCurrency": "To Currency"
+    "toCurrency": "To Currency",
+    "notFoundTitle": "Page Not Found",
+    "notFoundDescription": "The page you are looking for does not exist.",
+    "returnHome": "Return Home"
   }
 }
