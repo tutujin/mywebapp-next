@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Calculator from '@/components/Calculator';
 import CurrencyConverter from '@/components/CurrencyConverter';
 import { useTranslation } from 'react-i18next';
