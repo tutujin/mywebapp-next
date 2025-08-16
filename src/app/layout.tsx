@@ -12,12 +12,6 @@ export const metadata: Metadata = {
   keywords: "currency converter, exchange rate, calculator, finance, travel, real-time",
 };
 
-// =============================================================================
-// DEVELOPER NOTE: The i18n implementation below is the root cause of the
-// Vercel build failures. It has been restored so you can debug it.
-// To get the project to build successfully, you must comment out the lines
-// indicated below.
-// =============================================================================
 
 export default async function RootLayout({
   children,
@@ -26,8 +20,8 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // [BUILD-BREAKING] Line 1: This function call is part of the issue.
-  const i18n = await createI18nInstance(params.locale);
+ 
+  // const i18n = await createI18nInstance(params.locale);
 
   return (
     <html lang={params.locale}>
@@ -35,10 +29,7 @@ export default async function RootLayout({
         {/* 在此处粘贴您的 Google AdSense 代码 */}
         {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6098511288909511" crossorigin="anonymous"></script> */}
         
-        {/* [BUILD-BREAKING] Line 2: This Provider is part of the issue. */}
-        <I18nProvider i18n={i18n}>
-          {children}
-        </I18nProvider>
+        {children}
 
       </body>
     </html>
