@@ -26,7 +26,7 @@ export default async function RootLayout({
     <html lang={params.locale}>
       <body className={inter.className}>
         {/* 在此处粘贴您的 Google AdSense 代码 */}
-        {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6098511288909511" crossorigin="anonymous"></script> */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6098511288909511" crossOrigin="anonymous"></script>
         
         {children}
 
