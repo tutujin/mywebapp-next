@@ -1,13 +1,11 @@
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 
 export default function NotFound() {
-  const { t } = useTranslation('common');
   return (
     <div>
-      <h2>{t('notFoundTitle')}</h2>
-      <p>{t('notFoundDescription')}</p>
-      <Link href="/">{t('returnHome')}</Link>
+      <h2>Page Not Found</h2>
+      <p>The page you are looking for does not exist.</p>
+      <Link href="/">Return Home</Link>
     </div>
   );
 }
