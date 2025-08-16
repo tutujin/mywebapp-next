@@ -11,20 +11,28 @@ const CurrencyConverter: React.FC = () => {
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [apiResponseDebug, setApiResponseDebug] = useState<any>(null); // For debugging API response
 
   // Fetch exchange rates from our own API route
   useEffect(() => {
     const fetchRates = async () => {
       setLoading(true);
       setError(null);
+      setApiResponseDebug(null); // Clear previous debug info
       try {
         const response = await fetch(`/api/exchange-rate?from=${fromCurrency}`);
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.error || `Failed to fetch rates for ${fromCurrency}`);
+          setApiResponseDebug(errorData); // Store error response for debugging
+          throw new Error(errorData.error || `Failed to fetch rates for ${fromCurrency} (Status: ${response.status})`);
         }
         const data = await response.json();
-        setExchangeRates(data.conversion_rates);
+        setApiResponseDebug(data); // Store full response for debugging
+        if (data.conversion_rates) {
+          setExchangeRates(data.conversion_rates);
+        } else {
+          throw new Error("API response missing 'conversion_rates' field.");
+        }
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -74,8 +82,17 @@ const CurrencyConverter: React.FC = () => {
         <h5 className="card-title text-center">{t('currencyConverter')}</h5>
         {loading && <p className="text-center text-info">{t('loadingRates')}</p>}
         {error && <p className="text-center text-danger">{t('error')}: {error}</p>}
+        {apiResponseDebug && (
+          <div style={{ marginTop: '10px', padding: '10px', border: '1px solid #f00', backgroundColor: '#ffebeb', fontSize: '0.8em' }}>
+            <strong>API Debug Info:</strong>
+            <pre>{JSON.stringify(apiResponseDebug, null, 2)}</pre>
+          </div>
+        )}
         {!loading && !error && (
           <>
+            {Object.keys(exchangeRates).length === 0 && (
+              <p className="text-center text-warning">No currency options loaded. Check API key and response.</p>
+            )}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
               <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>{t('amount')}</label>
               <input
