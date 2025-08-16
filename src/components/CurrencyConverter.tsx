@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-// import { useTranslation } from 'react-i18next'; // Removed
 
 const CurrencyConverter: React.FC = () => {
-  // const { t } = useTranslation('common'); // Removed
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('CNY');
@@ -12,6 +10,15 @@ const CurrencyConverter: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [apiResponseDebug, setApiResponseDebug] = useState<any>(null); // For debugging API response
+
+  // Hardcoded list of common currencies
+  const commonCurrencies = [
+    'USD', 'EUR', 'JPY', 'GBP', 'CNY', 'AUD', 'CAD', 'CHF', 'HKD', 'SGD',
+    'SEK', 'KRW', 'NOK', 'NZD', 'INR', 'MXN', 'TWD', 'ZAR', 'BRL', 'DKK',
+    'PLN', 'THB', 'ILS', 'IDR', 'CZK', 'AED', 'TRY', 'HUF', 'PHP', 'MYR',
+    'COP', 'CLP', 'ARS', 'UAH', 'EGP', 'SAR', 'KWD', 'BHD', 'OMR', 'QAR',
+    'VND', 'PKR', 'NGN', 'KES', 'GHS', 'XAU', 'XAG', 'BTC', 'ETH', 'XRP'
+  ].sort(); // Sort them alphabetically
 
   // Fetch exchange rates from our own API route
   useEffect(() => {
@@ -61,7 +68,8 @@ const CurrencyConverter: React.FC = () => {
     setToCurrency(e.target.value);
   };
 
-  const currencyOptions = Object.keys(exchangeRates).sort();
+  // Use the hardcoded list for options
+  const currencyOptions = commonCurrencies;
 
   const inputStyle = {
     flexGrow: 1,
@@ -79,9 +87,9 @@ const CurrencyConverter: React.FC = () => {
   return (
     <div className="currency-converter card">
       <div className="card-body">
-        <h5 className="card-title text-center">Currency Converter</h5> {/* Replaced t('currencyConverter') */}
-        {loading && <p className="text-center text-info">Loading rates...</p>} {/* Replaced t('loadingRates') */}
-        {error && <p className="text-center text-danger">Error: {error}</p>} {/* Replaced t('error') */}
+        <h5 className="card-title text-center">Currency Converter</h5>
+        {loading && <p className="text-center text-info">Loading rates...</p>}
+        {error && <p className="text-center text-danger">Error: {error}</p>}
         {apiResponseDebug && (
           <div style={{ marginTop: '10px', padding: '10px', border: '1px solid #f00', backgroundColor: '#ffebeb', fontSize: '0.8em' }}>
             <strong>API Debug Info:</strong>
@@ -91,10 +99,10 @@ const CurrencyConverter: React.FC = () => {
         {!loading && !error && (
           <>
             {Object.keys(exchangeRates).length === 0 && (
-              <p className="text-center text-warning">No currency options loaded. Check API key and response.</p>
+              <p className="text-center text-warning">No real-time rates loaded. Check API key and response. Conversion might be limited.</p>
             )}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>Amount</label> {/* Replaced t('amount') */}
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>Amount</label>
               <input
                 type="number"
                 className="form-control"
@@ -106,7 +114,7 @@ const CurrencyConverter: React.FC = () => {
               />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>From</label> {/* Replaced t('from') */}
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>From</label>
               <select
                 className="form-control"
                 value={fromCurrency}
@@ -119,7 +127,7 @@ const CurrencyConverter: React.FC = () => {
               </select>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>To</label> {/* Replaced t('to') */}
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>To</label>
               <select
                 className="form-control"
                 value={toCurrency}
