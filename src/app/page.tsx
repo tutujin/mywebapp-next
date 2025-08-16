@@ -12,11 +12,11 @@ export default function Home() {
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">{t('multiTool')}</h1>
-      <div className="row">
-        <div className="col-md-6 mb-4">
+      <div className="two-column-layout">
+        <div className="column">
           <CurrencyConverter />
         </div>
-        <div className="col-md-6 mb-4">
+        <div className="column">
           <Calculator />
         </div>
       </div>
