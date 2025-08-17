@@ -20,10 +20,16 @@
     gap: 10px;
 }
 
-.calculator-grid .btn {
+/* Base button styling */
+.calculator-grid button {
     width: 100%;
-    height: 60px; /* Give buttons a uniform height */
+    height: 60px;
+    border-radius: 8px; /* Rounded rectangular buttons */
     font-size: 1.5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 /* Spanning items */
@@ -67,3 +73,24 @@
 .calculator-grid button:nth-child(17) { grid-area: subtract; }
 .calculator-grid button:nth-child(18) { grid-area: add; }
 .calculator-grid button:nth-child(19) { grid-area: equals; }
+
+/* Button color themes */
+.btn-number {
+    background-color: #e0e0e0; /* Light gray for numbers */
+    color: #333;
+}
+
+.btn-function {
+    background-color: #f0f0f0; /* Slightly different shade for functions */
+    color: #333;
+}
+
+.btn-operator {
+    background-color: #ff9500; /* Orange for operators */
+    color: white;
+}
+
+.btn-clear {
+    background-color: #ff3b30; /* Red for clear */
+    color: white;
+}

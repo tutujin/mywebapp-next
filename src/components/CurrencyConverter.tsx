@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const CurrencyConverter: React.FC = () => {
-  const { t } = useTranslation('common');
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('CNY');
@@ -11,20 +9,37 @@ const CurrencyConverter: React.FC = () => {
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [apiResponseDebug, setApiResponseDebug] = useState<any>(null); // For debugging API response
+
+  // Hardcoded list of common currencies
+  const commonCurrencies = [
+    'USD', 'EUR', 'JPY', 'GBP', 'CNY', 'AUD', 'CAD', 'CHF', 'HKD', 'SGD',
+    'SEK', 'KRW', 'NOK', 'NZD', 'INR', 'MXN', 'TWD', 'ZAR', 'BRL', 'DKK',
+    'PLN', 'THB', 'ILS', 'IDR', 'CZK', 'AED', 'TRY', 'HUF', 'PHP', 'MYR',
+    'COP', 'CLP', 'ARS', 'UAH', 'EGP', 'SAR', 'KWD', 'BHD', 'OMR', 'QAR',
+    'VND', 'PKR', 'NGN', 'KES', 'GHS', 'XAU', 'XAG', 'BTC', 'ETH', 'XRP'
+  ].sort(); // Sort them alphabetically
 
   // Fetch exchange rates from our own API route
   useEffect(() => {
     const fetchRates = async () => {
       setLoading(true);
       setError(null);
+      setApiResponseDebug(null); // Clear previous debug info
       try {
         const response = await fetch(`/api/exchange-rate?from=${fromCurrency}`);
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.error || `Failed to fetch rates for ${fromCurrency}`);
+          setApiResponseDebug(errorData); // Store error response for debugging
+          throw new Error(errorData.error || `Failed to fetch rates for ${fromCurrency} (Status: ${response.status})`);
         }
         const data = await response.json();
-        setExchangeRates(data.conversion_rates);
+        setApiResponseDebug(data); // Store full response for debugging
+        if (data.conversion_rates) {
+          setExchangeRates(data.conversion_rates);
+        } else {
+          throw new Error("API response missing 'conversion_rates' field.");
+        }
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -53,33 +68,87 @@ const CurrencyConverter: React.FC = () => {
     setToCurrency(e.target.value);
   };
 
-  const currencyOptions = Object.keys(exchangeRates).sort();
+  // Use the hardcoded list for options
+  const currencyOptions = commonCurrencies;
+
+  const inputStyle = {
+    flexGrow: 1,
+    padding: '8px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    outline: 'none',
+    transition: 'border-color 0.3s'
+  };
+
+  const focusStyle = {
+    borderColor: '#add8e6'
+  };
 
   return (
     <div className="currency-converter card">
       <div className="card-body">
-        <h5 className="card-title text-center">{t('currencyConverter')}</h5>
-        {loading && <p className="text-center text-info">{t('loadingRates')}</p>}
-        {error && <p className="text-center text-danger">{t('error')}: {error}</p>}
+        <h5 className="card-title text-center">Currency Converter</h5>
+        {loading && <p className="text-center text-info">Loading rates...</p>}
+        {error && <p className="text-center text-danger">Error: {error}</p>}
+        {apiResponseDebug && (
+          <div style={{ marginTop: '10px', padding: '10px', border: '1px solid #f00', backgroundColor: '#ffebeb', fontSize: '0.8em' }}>
+            <strong>API Debug Info:</strong>
+            <pre>{JSON.stringify(apiResponseDebug, null, 2)}</pre>
+          </div>
+        )}
         {!loading && !error && (
           <>
-            <div className="form-group">
-              <label>{t('amount')}</label>
-              <input type="number" className="form-control" value={amount} onChange={handleAmountChange} />
+            {Object.keys(exchangeRates).length === 0 && (
+              <p className="text-center text-warning">No real-time rates loaded. Check API key and response. Conversion might be limited.</p>
+            )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>Amount</label>
+              <input
+                type="number"
+                className="form-control"
+                value={amount}
+                onChange={handleAmountChange}
+                style={inputStyle}
+                onFocus={(e) => Object.assign(e.target.style, focusStyle)}
+                onBlur={(e) => e.target.style.borderColor = '#ccc'}
+              />
             </div>
-            <div className="form-group mt-2">
-              <label>{t('from')}</label>
-              <select className="form-control" value={fromCurrency} onChange={handleFromCurrencyChange}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>From</label>
+              <select
+                className="form-control"
+                value={fromCurrency}
+                onChange={handleFromCurrencyChange}
+                style={inputStyle}
+                onFocus={(e) => Object.assign(e.target.style, focusStyle)}
+                onBlur={(e) => e.target.style.borderColor = '#ccc'}
+              >
                 {currencyOptions.map(option => <option key={option} value={option}>{option}</option>)}
               </select>
             </div>
-            <div className="form-group mt-2">
-              <label>{t('to')}</label>
-              <select className="form-control" value={toCurrency} onChange={handleToCurrencyChange}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <label style={{ flexShrink: 0, width: '60px', textAlign: 'right' }}>To</label>
+              <select
+                className="form-control"
+                value={toCurrency}
+                onChange={handleToCurrencyChange}
+                style={inputStyle}
+                onFocus={(e) => Object.assign(e.target.style, focusStyle)}
+                onBlur={(e) => e.target.style.borderColor = '#ccc'}
+              >
                 {currencyOptions.map(option => <option key={option} value={option}>{option}</option>)}
               </select>
             </div>
-            <h4 className="text-center mt-3">
+            <h4
+              className="text-center mt-3"
+              style={
+                {
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                  color: '#0070f3'
+                }
+              }
+            >
               {amount} {fromCurrency} = {convertedAmount.toFixed(2)} {toCurrency}
             </h4>
           </>
