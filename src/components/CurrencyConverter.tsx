@@ -90,12 +90,7 @@ const CurrencyConverter: React.FC = () => {
         <h5 className="card-title text-center">Currency Converter</h5>
         {loading && <p className="text-center text-info">Loading rates...</p>}
         {error && <p className="text-center text-danger">Error: {error}</p>}
-        {apiResponseDebug && (
-          <div style={{ marginTop: '10px', padding: '10px', border: '1px solid #f00', backgroundColor: '#ffebeb', fontSize: '0.8em' }}>
-            <strong>API Debug Info:</strong>
-            <pre>{JSON.stringify(apiResponseDebug, null, 2)}</pre>
-          </div>
-        )}
+        
         {!loading && !error && (
           <>
             {Object.keys(exchangeRates).length === 0 && (
