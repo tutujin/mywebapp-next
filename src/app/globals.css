@@ -1,1 +1,54 @@
-/* Add your global styles here */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  margin: 0;
+  padding: 20px; /* Add some overall padding to the body */
+  background-color: #f5f5f5; /* Light gray background for the whole page */
+}
+
+.two-column-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Slightly reduced gap */
+  justify-content: center; /* Center columns if space allows */
+}
+
+.column {
+  flex: 1;
+  min-width: 300px; /* Ensures columns wrap on smaller screens */
+}
+
+.converter-column {
+  flex: 1.5; /* Give more space to the converter */
+  min-width: 350px; /* Ensure it doesn't get too small */
+  padding-bottom: 0.5rem; /* Reduce bottom padding/margin */
+}
+
+.calculator-column {
+  flex: 0.8; /* Make calculator column smaller */
+  max-width: 400px; /* Limit its max width */
+  min-width: 280px; /* Ensure it's not too small */
+}
+
+/* General styling for larger font in converter section */
+.converter-column h1,
+.converter-column h2,
+.converter-column h3,
+.converter-column p,
+.converter-column span,
+.converter-column div {
+  font-size: 1.2em; /* Example: Increase font size for common text elements */
+}
+
+/* Specific adjustment for the main exchange rate display if it exists */
+.converter-column .exchange-rate-display { /* Assuming such a class exists within CurrencyConverter */
+  font-size: 2em; /* Even larger for the main rate */
+  font-weight: bold;
+}
+
+/* Card styling */
+.card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
